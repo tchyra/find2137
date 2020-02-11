@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Where's 2137?</title>
+    <link href="styles/main.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="false" />
+    <link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Overpass|Overpass+Mono&display=swap" rel="stylesheet">
+    <link href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="settings-cover accent-back">
+
+        <div class="margin-center container">
+
+            <div class="group text-center">
+                <div class="title">Where's 2137?</div>
+                <div class="game-description subtitle">
+                    The game where you find 2137.
+                </div>
+            </div>
+
+            <div class="group frame">
+                <div class="frame-title">Game settings</div>
+
+                <div class="field plus-minus">
+                    <label>Horizontal number count</label>
+                    <div class="controls">
+                        <button class="btn-icon" data-action="decrease-big"><i class="mdi mdi-rewind-outline mdi-24px"></i></button>
+                        <button class="btn-icon" data-action="decrease"><i class="mdi mdi-minus mdi-24px"></i></button>
+                        <input id="horiz_num_count" type="number" min="4" max="10000" value="24" />
+                        <button class="btn-icon" data-action="increase"><i class="mdi mdi-plus mdi-24px"></i></button>
+                        <button class="btn-icon" data-action="increase-big"><i class="mdi mdi-fast-forward-outline mdi-24px"></i></button>
+                    </div>
+                </div>
+
+                <div class="field plus-minus">
+                    <label>Vertical number count</label>
+                    <div class="controls">
+                        <div class="controls">
+                            <button class="btn-icon" data-action="decrease-big"><i class="mdi mdi-rewind-outline mdi-24px"></i></button>
+                            <button class="btn-icon" data-action="decrease"><i class="mdi mdi-minus mdi-24px"></i></button>
+                            <input id="vert_num_count" type="number" min="4" max="10000" value="32" />
+                            <button class="btn-icon" data-action="increase"><i class="mdi mdi-plus mdi-24px"></i></button>
+                            <button class="btn-icon" data-action="increase-big"><i class="mdi mdi-fast-forward-outline mdi-24px"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field directions">
+
+                    <label>Possible directions</label>
+
+                    <div class="checkbox-grid">
+                        <div class="row">
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="ul" />
+                                <i class="mdi mdi-arrow-top-left mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="u" />
+                                <i class="mdi mdi-arrow-up mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="ur" />
+                                <i class="mdi mdi-arrow-top-right mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="l" />
+                                <i class="mdi mdi-arrow-left mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                            <label class="toggle-icon">
+                            </label>
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="r" checked />
+                                <i class="mdi mdi-arrow-right mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="dl" />
+                                <i class="mdi mdi-arrow-bottom-left mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="d" />
+                                <i class="mdi mdi-arrow-down mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                            <label class="toggle-icon">
+                                <input type="checkbox" name="directions" value="dr" />
+                                <i class="mdi mdi-arrow-bottom-right mdi-24px"></i>
+                                <div class="bg"></div>
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="group bottom-bar">
+                <button class="btn full-width" onclick="createBoard();">CREATE BOARD</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="pregame-cover out-right">
+
+        <div class="margin-center container">
+
+            <div class="group page-title">
+                <button class="btn-icon light" onclick="returnToSettings();"><i class="mdi mdi-arrow-left mdi-24px"></i></button>
+                <div class="title primary-text-light">
+                    Board ready!
+                </div>
+            </div>
+            <div class="group normal-text secondary-text-light">
+                <label>Objective</label>
+                Your objective is to find and select 2137. Search only in the directions you selected on the screen before.
+
+                <label>Navigation</label>
+                Drag with your mouse or finger to move around. Scroll or pinch to zoom.
+
+                <label>Selecting</label>
+                Click or tap a number to start a selection, and then pick a direction to continue it. The game will finish as soon as you select the correct answer.
+            </div>
+
+            <div class="bottom-bar">
+                <button class="btn light full-width" onclick="startGame();">START GAME</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="endgame-cover out-right accent-back flex-center">
+        <div class="group text-center">
+            <div class="you-did-it title">You did it!</div>
+            <div class="subtitle">You found 2137 in <span class="result-time"></span>.</div>
+            <div>
+                <span data-setting="width"></span> x <span data-setting="height"></span>
+                &nbsp;
+                <i class="mdi mdi-arrow-right mdi-18px" data-dir="r"></i>
+                <i class="mdi mdi-arrow-down mdi-18px" data-dir="d"></i>
+                <i class="mdi mdi-arrow-top-right mdi-18px" data-dir="ur"></i>
+                <i class="mdi mdi-arrow-bottom-right mdi-18px" data-dir="dr"></i>
+                <i class="mdi mdi-arrow-up mdi-18px" data-dir="u"></i>
+                <i class="mdi mdi-arrow-left mdi-18px" data-dir="l"></i>
+                <i class="mdi mdi-arrow-top-left mdi-18px" data-dir="ul"></i>
+                <i class="mdi mdi-arrow-bottom-left mdi-18px" data-dir="dl"></i>
+            </div>
+        </div>
+        <div class="group bottom-bar">
+            <button class="btn full-width" onclick="returnToSettings();">BACK TO SETTINGS</button>
+        </div>
+    </div>
+
+    <div class="game secondary-back">
+
+        <div class="paused-cover">
+
+            <div class="margin-center container">
+
+                <div class="group">
+                    <div class="title primary-text-light">Game paused</div>
+                </div>
+
+                <div class="group secondary-text-light">
+                    <div class="normal-text">Current game settings</div>
+
+                    <label>Board size</label>
+                    <i class="mdi mdi-unfold-more-horizontal mdi-18px"></i><span data-setting="width"></span>
+                    <i class="mdi mdi-unfold-more-vertical mdi-18px"></i><span data-setting="height"></span>
+
+
+                    <label>Directions</label>
+                    <i class="mdi mdi-arrow-right mdi-18px" data-dir="r"></i>
+                    <i class="mdi mdi-arrow-down mdi-18px" data-dir="d"></i>
+                    <i class="mdi mdi-arrow-top-right mdi-18px" data-dir="ur"></i>
+                    <i class="mdi mdi-arrow-bottom-right mdi-18px" data-dir="dr"></i>
+                    <i class="mdi mdi-arrow-up mdi-18px" data-dir="u"></i>
+                    <i class="mdi mdi-arrow-left mdi-18px" data-dir="l"></i>
+                    <i class="mdi mdi-arrow-top-left mdi-18px" data-dir="ul"></i>
+                    <i class="mdi mdi-arrow-bottom-left mdi-18px" data-dir="dl"></i>
+
+                </div>
+
+                <div class="group">
+                    <button class="btn light full-width" onclick="returnToSettings();">EXIT TO SETTINGS</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="drag-container">
+            <div class="numbers-container mono-text">
+                <div class="numbers"></div>
+                <div class="selector hidden mono-text">0</div>
+            </div>
+        </div>
+
+        <div class="selector-direction hidden">
+            <button data-dir="ul" class="up-left btn-icon accent light"><i class="mdi mdi-arrow-top-left mdi-24px"></i></button>
+            <button data-dir="u" class="up btn-icon accent light"><i class="mdi mdi-arrow-up mdi-24px"></i></button>
+            <button data-dir="ur" class="up-right btn-icon accent light"><i class="mdi mdi-arrow-top-right mdi-24px"></i></button>
+            <button data-dir="l" class="left btn-icon accent light"><i class="mdi mdi-arrow-left mdi-24px"></i></button>
+            <button data-dir="r" class="right btn-icon accent light"><i class="mdi mdi-arrow-right mdi-24px"></i></button>
+            <button data-dir="dl" class="down-left btn-icon accent light"><i class="mdi mdi-arrow-bottom-left mdi-24px"></i></button>
+            <button data-dir="d" class="down btn-icon accent light"><i class="mdi mdi-arrow-down mdi-24px"></i></button>
+            <button data-dir="dr" class="down-right btn-icon accent light"><i class="mdi mdi-arrow-bottom-right mdi-24px"></i></button>
+        </div>
+
+        <div class="bottom-bar primary-back text-center">
+
+            <div class="normal-text left secondary-text-light">
+                <span>Find</span>&nbsp;
+                <strong class="mono-text accent-text">2137</strong>
+            </div>
+
+            <div id="stopwatch" class="mono-text secondary-text-light stopwatch right">0:02:01.123</div>
+            <div class="normal-text right">
+                <button id="pause" class="btn-icon light" onclick="toggleStopwatch();"><i class="mdi mdi-pause mdi-24px primary-text-light"></i></button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
