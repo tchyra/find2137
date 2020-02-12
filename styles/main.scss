@@ -223,6 +223,10 @@ label {
     margin-bottom: 8px;
 }
 
+[data-dir].hidden {
+    display: none;
+}
+
 /*#region fields and buttons*/
 
 .field {

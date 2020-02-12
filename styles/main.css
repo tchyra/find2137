@@ -142,6 +142,9 @@ label {
   font-size: 0.9rem;
   margin-bottom: 8px; }
 
+[data-dir].hidden {
+  display: none; }
+
 /*#region fields and buttons*/
 .field.plus-minus .controls {
   height: 40px;
